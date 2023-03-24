@@ -22,4 +22,4 @@ This parent contains:
 
 ### How to
 
-Check the [latest release](https://github.com/onecx/onecx-quarkus2-parent/releases) page for details.
+Check the [latest release](https://github.com/onecx/onecx-quarkus2-parent/releases/latest)) page for details.
