@@ -16,9 +16,10 @@ This parent contains:
   * MapStruct
   * [tkit-quarkus](https://github.com/1000kit/tkit-quarkus)
 * plugin to build the application
-* plugins for test
+* plugins for testing the application
 * plugin to sort imports
 * plugin to validate format
+
 
 ### How to
 
