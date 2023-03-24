@@ -5,5 +5,5 @@ on:
       - '**'
 jobs:
   java:
-    uses: onecx/ci-java-lib/build-release.yml@v1
+    uses: onecx/ci-java-lib/.github/workflows/build-release.yml@v1
     secrets: inherit

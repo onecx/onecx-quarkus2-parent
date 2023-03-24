@@ -3,5 +3,5 @@ on:
   workflow_dispatch:
 jobs:
   release:
-    uses: onecx/ci-java-lib/create-release.yml@v1
+    uses: onecx/ci-java-lib/.github/workflows/create-release.yml@v1
     secrets: inherit
