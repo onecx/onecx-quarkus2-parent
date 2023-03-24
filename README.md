@@ -21,6 +21,6 @@ This parent contains:
 * plugin to validate format
 
 
-### How to
+### How to ...
 
 Check the [latest release](https://github.com/onecx/onecx-quarkus2-parent/releases/latest) page for details.
