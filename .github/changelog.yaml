@@ -10,11 +10,23 @@ sections:
 template: |
   Add OneCx application maven parent to your project:
   ```xml
+  <project>
+    
     <parent>
         <groupId>com.github.onecx</groupId>
         <artifactId>onecx-quarkus2-parent</artifactId>
         <version>{{ .Version }}</version>
-    </parent> 
+    </parent>
+    
+    
+    <repositories>
+      <repository>
+          <id>github</id>
+          <url>https://maven.pkg.github.com/onecx</url>
+      </repository>
+    </repositories>
+  
+  </project>
   ```
   {{ range $section := .Sections }}{{ if $section.Items }}### {{ $section.GetTitle }}{{ range $item := $section.Items }}
   * [#{{ $item.GetID }}]({{ $item.GetURL }}) - {{ $item.GetTitle }}{{ end }}{{ end }}
