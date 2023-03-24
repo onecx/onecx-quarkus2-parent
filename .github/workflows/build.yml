@@ -1,0 +1,11 @@
+name: build
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+
+jobs:
+  java:
+    uses: onecx/ci-java-lib/build.yml@v1
+    secrets: inherit
