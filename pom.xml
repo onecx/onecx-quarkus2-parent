@@ -4,7 +4,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.onecx</groupId>
+    <groupId>io.github.onecx</groupId>
     <artifactId>onecx-quarkus2-parent</artifactId>
     <version>999-SNAPSHOT</version>
     <name>onecx-quarkus2-parent</name>
@@ -12,6 +12,20 @@
 
     <description>Onecx Quarkus application parent</description>
     <url>https://github.com/onecx/onecx-quarkus2-parent</url>
+
+    <organization>
+        <name>onecx</name>
+        <url>https://github.com/onecx</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>tkit-dev</id>
+            <name>tkit-dev</name>
+            <organization>onecx</organization>
+            <organizationUrl>https://github.com/onecx</organizationUrl>
+        </developer>
+    </developers>
 
     <licenses>
         <license>
@@ -21,17 +35,31 @@
         </license>
     </licenses>
 
+    <scm>
+        <connection>scm:git:git@github.com:onecx/onecx-quarkus2-parent.git</connection>
+        <developerConnection>scm:git:git@github.com:onecx/onecx-quarkus2-parent.git</developerConnection>
+        <url>https://github.com/onecx/onecx-quarkus2-parent</url>
+    </scm>
 
     <properties>
+        <!-- Quarkus configuration -->
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
         <quarkus.version>2.16.5.Final</quarkus.version>
+
+        <!-- Maven configuration -->
         <compiler-plugin.version>3.8.1</compiler-plugin.version>
         <surefire-plugin.version>3.0.0-M9</surefire-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.parameters>true</maven.compiler.parameters>
+
+        <!-- Maven central release configuration -->
+        <nexus.staging-plugin.version>1.6.13</nexus.staging-plugin.version>
+        <source-plugin.version>3.2.1</source-plugin.version>
+        <javadoc-plugin.version>3.5.0</javadoc-plugin.version>
+        <gpg-plugin.version>3.0.1</gpg-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -66,11 +94,92 @@
         </plugins>
     </build>
 
+    <!-- Profiles -->
+    <profiles>
+        <profile>
+            <id>release</id>
+            <activation>
+                <property>
+                    <name>release</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>${nexus.staging-plugin.version}</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <!-- Generate source code artifact -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>${source-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Generate javadoc artifact -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${javadoc-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Sign artifacts before upload -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${gpg-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <!-- Maven central repository -->
     <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
         <repository>
-            <id>github</id>
-            <name>GitHub Onecx Maven Packages</name>
-            <url>https://maven.pkg.github.com/onecx/onecx-quarkus2-parent</url>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+
 </project>
