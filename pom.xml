@@ -71,6 +71,13 @@
         <source-plugin.version>3.2.1</source-plugin.version>
         <javadoc-plugin.version>3.5.0</javadoc-plugin.version>
         <gpg-plugin.version>3.0.1</gpg-plugin.version>
+
+        <!-- Sonar -->
+        <sonar.coverage.exclusions>
+            **/model*/**/*.*,**/resources/**/*.*,**/JaxRsActivator*
+        </sonar.coverage.exclusions>
+<!--        <sonar.exclusions></sonar.exclusions>-->
+
     </properties>
 
     <dependencyManagement>
@@ -267,9 +274,20 @@
                                     <excludes>
                                         <exclude>junit:junit</exclude>
                                         <exclude>commons-lang:commons-lang</exclude>
+                                        <exclude>commons-collections:commons-collections</exclude>
                                         <exclude>org.apache.commons:commons-lang3</exclude>
+                                        <exclude>org.apache.commons:commons-text</exclude>
                                         <exclude>com.google.code.gson:gson</exclude>
                                         <exclude>com.google.guava:guava</exclude>
+                                        <exclude>com.squareup.okhttp3:*</exclude>
+                                        <exclude>com.alibaba:*</exclude>
+                                        <exclude>org.glassfish:*</exclude>
+                                        <exclude>org.jboss.resteasy:*</exclude>
+                                        <exclude>io.swagger:*</exclude>
+                                        <exclude>io.swagger.core.v3:*</exclude>
+                                        <exclude>io.specto:hoverfly-java</exclude>
+                                        <exclude>org.mockito:mockito-junit-jupiter</exclude>
+                                        <exclude>commons-validator:commons-validator</exclude>
                                     </excludes>
                                     <message>Found banned dependencies</message>
                                     <searchTransitive>false</searchTransitive>
