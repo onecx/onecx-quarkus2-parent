@@ -20,6 +20,11 @@ This parent contains:
 * plugin to sort imports
 * plugin to validate format
 
+### Profiles
+
+#### openapi
+
+OpenApi generate an openapi.yaml in the target directory
 
 ### How to ...
 
