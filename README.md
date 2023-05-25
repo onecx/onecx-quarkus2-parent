@@ -23,7 +23,7 @@ This parent contains:
 ### Profiles
 
 #### openapi
-
+mvn clean install -Popenapi
 OpenApi generate an openapi.yaml in the target directory
 
 ### How to ...
